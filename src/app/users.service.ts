@@ -18,7 +18,9 @@ export class UsersService {
         score: 100
       })
     });
+  }
 
-    console.log(this.users);
+  isValid() {
+    return this.users.length > 0;
   }
 }
