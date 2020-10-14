@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { VictimGuard } from './guards/victim-guard.service'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -19,7 +20,7 @@ import { QuizComponent } from './quiz/quiz.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [VictimGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

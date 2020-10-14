@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class HomeComponent implements OnInit {
   public victimsCount: number = 0;
   victimsForm = new FormArray([]);
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private userService: UsersService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -35,5 +39,6 @@ export class HomeComponent implements OnInit {
 
   start() {
     this.userService.addUsers(this.victimsForm.value);
+    this.router.navigate(['/quiz']);
   }
 }
