@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Victim } from './models/victim';
+import { Victim } from '../models/victim';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
-  users: Victim[];
+export class VictimsService {
+  victims: Victim[];
 
   constructor() {
-    this.users = [];
+    this.victims = [];
   }
 
-  addUsers(userList: string[]) {
+  addVictims(userList: string[]) {
     userList.forEach(user => {
-      this.users.push({
+      this.victims.push({
         name: user,
         score: 100
       })
@@ -21,6 +21,6 @@ export class UsersService {
   }
 
   isValid() {
-    return this.users.length > 0;
+    return this.victims.length > 0;
   }
 }
