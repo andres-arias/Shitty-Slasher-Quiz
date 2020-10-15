@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Victim } from '../models/victim';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VictimsService {
-  victims: Victim[];
+  victims: Object = {
+
+  };
 
   constructor() {
-    this.victims = [];
   }
 
   addVictims(userList: string[]) {
     userList.forEach(user => {
-      this.victims.push({
-        name: user,
-        score: 100
-      })
+      this.victims[user] = 100;
     });
   }
 
+  getScore(name: string) {
+    return this.victims[name];
+  }
+
+  changeScore(name: string, score: number) {
+    this.victims[name] += score;
+  }
+
   isValid() {
-    return this.victims.length > 0;
+    return Object.keys(this.victims).length > 0;
   }
 }

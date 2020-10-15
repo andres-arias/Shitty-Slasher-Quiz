@@ -9,11 +9,47 @@
   </div>
   <main role="main" class="inner cover home-card">
     
-    <p class="lead">
-      ¿Alguna vez se ha preguntado si usted seria capaz de sobrevivir
-      en una pelicula slasher de mierda de Hollywood de 
-      esas que usted ve y siente que perdio dos horas de su vida?
-    </p>
+    <h1>
+      {{questions[currentQuestion].question}}
+    </h1>
+    <form [formGroup]="this.questionsForm">
+      <div *ngFor="let control of questionsForm.controls; index as i">
+        <input class="form-check-input" type="checkbox" [formControl]="questionsForm.controls[i]">
+        <label class="form-check-label">
+          {{ getVictim(i) }}
+        </label>
+      </div>
+    </form>
+    <div class="btn-group" style="margin-top: 10px;">
+      <button type="button" class="btn btn-secondary">Volver a Empezar</button>
+      <button type="button" class="btn btn-dark" (click)="calculateScore()">Calcular</button>
+    </div>
+    <div *ngIf="showScore" style="margin-top: 5px;" >
+      <h3>
+        {{ questions[currentQuestion].flavorText }}
+      </h3>
+      <h4>
+        Puntuacion actual
+      </h4>
+      <div class="row" *ngFor="let victim of victims">
+        <div class="col">
+          {{ victim.name }}
+        </div>
+        <div class="col" *ngIf="victim.score > 0; else notDead">
+          {{ victim.score }}
+        </div>
+        <ng-template #notDead>
+          <div class="col">
+            Muerto
+          </div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="this.currentQuestion < this.questions.length"></div>
+        <div class="btn-group" style="margin-top: 10px;">
+          <button type="button" class="btn btn-dark" (click)="nextQuestion()">Siguiente</button>
+        </div>
+      </div>
 
   </main>
 

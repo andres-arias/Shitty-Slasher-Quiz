@@ -6,7 +6,7 @@ import { QuizComponent } from './quiz/quiz.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'quiz', component: QuizComponent, canActivate: [VictimGuard]}
+  { path: 'quiz', component: QuizComponent}
 ];
 
 @NgModule({
