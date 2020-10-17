@@ -18,7 +18,7 @@ export class ScoreComponent implements OnInit {
   }
 
   start() {
-    location.reload();
+    this.router.navigate(['/']);
   }
 
 }

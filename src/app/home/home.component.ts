@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   removeAll() {
-    this.victimsForm.clear();
+    this.victimsForm = new FormArray([]);
     this.victimsCount = 0;
   }
 

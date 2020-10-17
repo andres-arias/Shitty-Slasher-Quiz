@@ -20,7 +20,7 @@ export class VictimsService {
     userList.forEach(user => {
       this.victims.push({
         name: user,
-        score: 100,
+        score: 0,
         alive: true
       });
     });
@@ -34,9 +34,9 @@ export class VictimsService {
 
   public changeScore(name: string, score: number) {
     this.victims.forEach(victim => {
-      if (victim.name == name && victim.score > 0) {
-        victim.score += score;
-        if (victim.score <= 0)
+      if (victim.name == name && victim.score <= 5) {
+        victim.score = victim.score + score;
+        if (victim.score > 5)
           victim.alive = false; 
       }
     });

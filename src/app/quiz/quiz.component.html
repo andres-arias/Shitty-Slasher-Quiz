@@ -21,7 +21,7 @@
         </div>
       </form>
       <div class="btn-group" style="margin-top: 10px;">
-        <button type="button" class="btn btn-secondary">Volver a Empezar</button>
+        <button type="button" class="btn btn-secondary" (click)="retry()">Volver a Empezar</button>
         <button type="button" class="btn btn-dark" (click)="calculateScore()">Calcular</button>
       </div>
     </div>
@@ -29,6 +29,9 @@
       <h3>
         {{ questions[currentQuestion].flavorText }}
       </h3>
+      <p class="lead">
+        (<i><strong>Trope:</strong> {{ questions[currentQuestion].trope }})</i>
+      </p>
       <h4>
         Puntuacion actual
       </h4>
@@ -36,7 +39,7 @@
         <div class="col">
           {{ victim.name }}
         </div>
-        <div class="col" *ngIf="victim.score > 0; else notDead">
+        <div class="col" *ngIf="victim.score <= 5; else notDead">
           {{ victim.score }}
         </div>
         <ng-template #notDead>
