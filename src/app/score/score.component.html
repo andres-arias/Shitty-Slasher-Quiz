@@ -1,1 +1,36 @@
-<p>score works!</p>
+
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+    </div>
+  </header>
+  <div class="cover-heading">
+    Resultados
+  </div>
+  <main role="main" class="inner cover home-card">
+    <h2>Como les fue?</h2>
+    <h3>Puntuacion final</h3>
+    <div class="row" *ngFor="let victim of this.victimsService.getVictims()">
+      <div class="col">
+        {{ victim.name }}
+      </div>
+      <div class="col" *ngIf="victim.score > 0; else Dead">
+        {{ victim.score }}
+      </div>
+      <ng-template #Dead>
+        <div class="col">
+          Muerto
+        </div>
+      </ng-template>
+    </div>
+    <div class="btn-group" style="margin-top: 10px;">
+      <button type="button" class="btn btn-dark" (click)="start()">Volver al principio</button>
+    </div>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>&copy; El bañazo de Arias</p>
+    </div>
+  </footer>
+</div>

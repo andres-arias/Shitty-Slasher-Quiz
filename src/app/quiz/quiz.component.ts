@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Question } from '../models/question';
-import { Victim } from '../models/victim';
+import { VictimsService } from '../service/victims.service';
 
 @Component({
   selector: 'app-quiz',
@@ -11,11 +12,13 @@ import { Victim } from '../models/victim';
 export class QuizComponent implements OnInit {
   questionsForm = new FormArray([]);
   public questions: Question[]
-  public victims: Victim[];
   public currentQuestion: number;
   showScore: boolean = false;
 
-  constructor() {
+  constructor(
+    private router: Router,
+    public victimsService: VictimsService 
+  ) {
     this.questions = [
       {
         question: 'Es usted afrodescendiente?',
@@ -30,16 +33,6 @@ export class QuizComponent implements OnInit {
         noScore: 10
       }
     ]
-    this.victims = [
-      {
-        name: 'Andres',
-        score: 100
-      },
-      {
-        name: 'Gloriana',
-        score: 100
-      }
-    ];
 
     this.currentQuestion = 0;
   }
@@ -49,23 +42,25 @@ export class QuizComponent implements OnInit {
   }
 
   getVictim(index: number) {
-    return this.victims[index].name;
+    return this.victimsService.getVictims()[index];
   }
 
   buildVictims() {
-    this.victims.forEach(victim => {
+    this.victimsService.getVictims().forEach(victim => {
       this.questionsForm.push(new FormControl(false));
     });
   }
 
   calculateScore() {
-    for (let victim = 0; victim < this.victims.length; victim++) {
+    for (let victim = 0; victim < this.victimsService.getVictims().length; victim++) {
       if (this.questionsForm.value[victim]) {
-        this.victims[victim].score += this.questions[this.currentQuestion].yesScore
+        this.victimsService.changeScore(this.victimsService.getVictims()[victim].name,
+                                        this.questions[this.currentQuestion].yesScore);
       } else {
-        this.victims[victim].score += this.questions[this.currentQuestion].noScore
+        this.victimsService.changeScore(this.victimsService.getVictims()[victim].name,
+                                        this.questions[this.currentQuestion].noScore);
       }
-      console.log(this.victims);
+      console.log(this.victimsService.getVictims()[0].score)
       this.showScore = true;
     }
   }
@@ -75,6 +70,10 @@ export class QuizComponent implements OnInit {
     this.showScore = false;
     this.buildVictims();
     this.currentQuestion++;
+  }
+
+  finish() {
+    this.router.navigate(['/score']);
   }
 
 }

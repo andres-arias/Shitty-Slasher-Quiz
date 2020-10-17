@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VictimsService } from '../service/victims.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-score',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public victimsService: VictimsService,
+    private router: Router
+  ) {  }
 
   ngOnInit(): void {
+  }
+
+  start() {
+    location.reload();
   }
 
 }

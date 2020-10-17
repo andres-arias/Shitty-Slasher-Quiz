@@ -11,17 +11,19 @@
     <h1>
       {{questions[currentQuestion].question}}
     </h1>
-    <form [formGroup]="this.questionsForm">
-      <div *ngFor="let control of questionsForm.controls; index as i">
-        <input class="form-check-input" type="checkbox" [formControl]="questionsForm.controls[i]">
-        <label class="form-check-label">
-          {{ getVictim(i) }}
-        </label>
+    <div *ngIf="!showScore">
+      <form [formGroup]="this.questionsForm">
+        <div *ngFor="let control of questionsForm.controls; index as i">
+          <input class="form-check-input" type="checkbox" [formControl]="questionsForm.controls[i]">
+          <label class="form-check-label">
+            {{ getVictim(i).name }}
+          </label>
+        </div>
+      </form>
+      <div class="btn-group" style="margin-top: 10px;">
+        <button type="button" class="btn btn-secondary">Volver a Empezar</button>
+        <button type="button" class="btn btn-dark" (click)="calculateScore()">Calcular</button>
       </div>
-    </form>
-    <div class="btn-group" style="margin-top: 10px;">
-      <button type="button" class="btn btn-secondary">Volver a Empezar</button>
-      <button type="button" class="btn btn-dark" (click)="calculateScore()">Calcular</button>
     </div>
     <div *ngIf="showScore" style="margin-top: 5px;" >
       <h3>
@@ -30,7 +32,7 @@
       <h4>
         Puntuacion actual
       </h4>
-      <div class="row" *ngFor="let victim of victims">
+      <div class="row" *ngFor="let victim of this.victimsService.getVictims()">
         <div class="col">
           {{ victim.name }}
         </div>
@@ -46,7 +48,7 @@
 
       <div *ngIf="this.currentQuestion == this.questions.length - 1; else notDone">
         <div class="btn-group" style="margin-top: 10px;">
-          <button type="button" class="btn btn-dark" (click)="nextQuestion()">Finalizar</button>
+          <button type="button" class="btn btn-dark" (click)="finish()">Finalizar</button>
         </div>
       </div>
       <ng-template #notDone>
