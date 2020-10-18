@@ -42,6 +42,13 @@ export class QuizComponent implements OnInit {
         noScore: 0
       },
       {
+        question: 'Usted es afrodescendiente?',
+        flavorText: 'Esto no es una película de Jordan Peele.',
+        trope: 'Black guy dies first',
+        yesScore: 10,
+        noScore: 0
+      },
+      {
         question: 'Se le gastan muy rapido los datos del celular?',
         flavorText: 'No pudo pedir ayuda por falta de datos y se lo rajaron.',
         trope: 'No signal',
@@ -95,13 +102,6 @@ export class QuizComponent implements OnInit {
         flavorText: 'Que lastima que se caiga cuando un psicópata lo persiga con un cuchillo. RIP. ',
         trope: 'People falling too much',
         yesScore: 1,
-        noScore: 0
-      },
-      {
-        question: 'Usted es afrodescendiente?',
-        flavorText: 'Esto no es una película de Jordan Peele.',
-        trope: 'Black guy dies first',
-        yesScore: 10,
         noScore: 0
       },
       {
